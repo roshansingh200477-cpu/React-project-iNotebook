@@ -1,0 +1,68 @@
+/* Dark glass gradient */
+.navbar-premium {
+  background: linear-gradient(135deg, #0f0f0f, #1c1c1c, #111);
+  padding: 15px 0;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  transition: all 0.4s ease;
+}
+
+/* Brand glow effect */
+.brand-glow {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  transition: 0.4s;
+}
+
+.brand-glow:hover {
+  text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff;
+}
+
+/* Animated nav links */
+.nav-animate {
+  position: relative;
+  margin: 0 20px;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.nav-animate::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0%;
+  height: 2px;
+  background: #00f2ff;
+  transition: 0.4s ease;
+}
+
+.nav-animate:hover::after {
+  width: 100%;
+}
+
+.nav-animate:hover {
+  color: #00f2ff !important;
+}
+
+/* Expanding search animation */
+.search-wrapper {
+  position: relative;
+}
+
+.search-input {
+  width: 150px;
+  border-radius: 30px;
+  border: none;
+  padding-left: 15px;
+  transition: width 0.4s ease, box-shadow 0.4s ease;
+  background: #222;
+  color: #fff;
+}
+
+.search-input:focus {
+  width: 230px;
+  box-shadow: 0 0 12px rgba(0, 242, 255, 0.6);
+  outline: none;
+}
