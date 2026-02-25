@@ -1,44 +1,59 @@
-import React, { useContext } from 'react';
-import noteContext from '../context/notes/NoteContext';
+import React, { useContext } from 'react'
+import noteContext from '../context/notes/NoteContext'
 
+const NoteItem = (props) => {
+  const context = useContext(noteContext);
+  const { deleteNote } = context;
+  const { note, updateNote, showAlert } = props;
 
-const NoteItem = ({ note, updateNote, showAlert }) => {
-    const { deleteNote} = useContext(noteContext);
-    // const { note } = props;
-    return (
-        <>
-            {
-                <div className="mx-3 my-2" style={{ border: "2px solid black", padding: "10px", width: "50rem", height: "8rem", boxShadow: "0px 2px 5px 5px"}}>
-                    <h2>{note.title}</h2>
-                    <p>{note.description}</p>
-                    <i className="fa-solid fa-trash-can mx-3" onClick={()=>{deleteNote(note._id);   showAlert("Deleted Successfully", "success");}}></i>
-                    <i className="fa-regular fa-pen-to-square" onClick={()=>{updateNote(note)}}></i>
-                </div >
-            }
-        </>
+  return (
+    <div className="col-md-4 mb-4">
+      <div
+        className="card h-100"
+        style={{
+          borderRadius: "18px",
+          border: "none",
+          boxShadow: "0 8px 20px rgba(0,0,0,0.15)",
+          transition: "0.4s ease",
+          cursor: "pointer"
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.transform = "translateY(-8px)";
+          e.currentTarget.style.boxShadow = "0 12px 30px rgba(0,0,0,0.25)";
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.transform = "translateY(0px)";
+          e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,0,0,0.15)";
+        }}
+      >
+        <div className="card-body">
+          <h5 className="card-title fw-bold">{note.title}</h5>
+          <p className="card-text text-muted">{note.description}</p>
 
+          <div className="d-flex justify-content-end mt-3">
+            <i 
+              className="fa-solid fa-trash-can mx-3 text-danger"
+              style={{ cursor: "pointer", transition: "0.3s" }}
+              onMouseOver={e => e.target.style.transform = "scale(1.2)"}
+              onMouseOut={e => e.target.style.transform = "scale(1)"}
+              onClick={() => {
+                deleteNote(note._id);
+                showAlert("Deleted Successfully", "success");
+              }}
+            ></i>
 
-
-        /* <div className="card" style={{width: "18rem",height: "15rem"}}>
-      <div className="card-body">
-        <h5 className="card-title">Card title</h5>
-        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-        <a href="#" className="btn btn-primary">Go somewhere</a>
+            <i 
+              className="fa-regular fa-pen-to-square text-primary"
+              style={{ cursor: "pointer", transition: "0.3s" }}
+              onMouseOver={e => e.target.style.transform = "scale(1.2)"}
+              onMouseOut={e => e.target.style.transform = "scale(1)"}
+              onClick={() => updateNote(note)}
+            ></i>
+          </div>
+        </div>
       </div>
-    </div> */
-
-    );
+    </div>
+  )
 }
 
-
-export default NoteItem;
-
-/* </div>
-        <div className="col-md-3 my-2">
-            <div className="card">
-                <div className="card-body">
-                    <h5 className="card-title">{note.title}</h5>
-                    <p className="card-text">{note.description}</p>
-                </div>
-            </div>
-        </div>  */
+export default NoteItem
