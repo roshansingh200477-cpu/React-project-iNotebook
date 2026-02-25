@@ -3,7 +3,7 @@ import noteContext from '../context/notes/NoteContext';
 import NoteItem from './NoteItem';
 import AddNote from './AddNote';
 
-const Notes = () => {
+const Notes = (props) => {
   // const context = useContext(noteContext);
   const { notes, getNotes , editNote} = useContext(noteContext);
   useEffect(() => {
@@ -16,18 +16,19 @@ const Notes = () => {
   }
   const ref = useRef(null)
   const refClose = useRef(null)
-
+  
   const [note, setNote] = useState({
     id:"",
     etitle: "",
     edescription: "",
     etag: ""
   });
-
+  
   const handleClick = (e) => {
     e.preventDefault();
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
+    props.showAlert("Updated Successfully", "success");
 
   }
 
@@ -36,7 +37,7 @@ const Notes = () => {
   }
   return (
     <>
-      <AddNote />
+      <AddNote showAlert={props.showAlert} />
 
       <button type="button" ref={ref} className="d-none btn btn-primary my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Launch demo modal
@@ -78,7 +79,7 @@ const Notes = () => {
         {notes.length === 0 && <p>No notes available</p>}
         <div className="row">
           {notes.map((note) => (
-            <NoteItem key={note._id} updateNote={updateNote} note={note} />
+            <NoteItem key={note._id} updateNote={updateNote} note={note} showAlert={props.showAlert} />
           ))}
         </div>
       </div>
